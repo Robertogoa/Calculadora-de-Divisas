@@ -1,5 +1,7 @@
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
 
@@ -14,6 +16,17 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
      */
     public CalculadoraDeDivisas() {
         initComponents();
+        Random numeroAzar = new Random();
+        int numeroCliente = numeroAzar.nextInt(1000);
+        DateFormat formatoFecha = DateFormat.getDateInstance(DateFormat.LONG);
+        DateFormat formatoHora = DateFormat.getTimeInstance(DateFormat.LONG);
+        
+        jTextFieldCliente.setText(String.valueOf(numeroCliente));
+        jTextArea1.append("Numero de cliente: " + numeroCliente + "\n");
+        jTextArea1.append(formatoFecha.format(Calendar.getInstance().getTime()));
+        jTextArea1.append("\nA las: " + formatoHora.format(Calendar.getInstance().getTime()));
+
+      
     }
 
     /**
@@ -25,8 +38,7 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBoxDolars = new javax.swing.JCheckBox();
-        jCheckBoxPounds = new javax.swing.JCheckBox();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jTextFieldKilometros = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -42,12 +54,16 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
+        jRadioButtonDolar = new javax.swing.JRadioButton();
+        jRadioButtonLibra = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jCheckBoxDolars.setText("Dolars $");
-
-        jCheckBoxPounds.setText("Pounds £");
+        jTextFieldKilometros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldKilometrosActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Kilómetros");
 
@@ -60,6 +76,11 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
         });
 
         jButtonTransformar.setText("Transformar");
+        jButtonTransformar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTransformarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("    Total a Pagar");
 
@@ -77,6 +98,7 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldCliente.setEditable(false);
         jTextFieldCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldClienteActionPerformed(evt);
@@ -85,11 +107,29 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
 
         jLabel4.setText("Nº de Cliente");
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel5.setText("                    Ticket");
+
+        buttonGroup1.add(jRadioButtonDolar);
+        jRadioButtonDolar.setSelected(true);
+        jRadioButtonDolar.setText("Euro a Dolar");
+        jRadioButtonDolar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonDolarActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButtonLibra);
+        jRadioButtonLibra.setText("Euro a Libras");
+        jRadioButtonLibra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonLibraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,7 +157,12 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
                             .addGap(55, 55, 55)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(pagarKilometros, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pagarTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(pagarTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jRadioButtonLibra)
+                                        .addComponent(jRadioButtonDolar))))
                             .addGap(19, 19, 19)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
@@ -126,11 +171,8 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
                         .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(208, 208, 208))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCheckBoxPounds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCheckBoxDolars, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonTransformar))
+                        .addGap(29, 29, 29)
+                        .addComponent(jButtonTransformar)
                         .addGap(76, 76, 76)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,10 +217,10 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(pagarTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonCalcularTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBoxDolars)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBoxPounds)
+                        .addGap(15, 15, 15)
+                        .addComponent(jRadioButtonDolar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButtonLibra)
                         .addGap(22, 22, 22)
                         .addComponent(jButtonTransformar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(121, Short.MAX_VALUE))
@@ -188,42 +230,49 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void calcularKilometrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularKilometrosActionPerformed
-        
         int kilómetros = Integer.valueOf(jTextFieldKilometros.getText());
         int Calcularkilometros = kilómetros * 10;
         pagarKilometros.setText(String.valueOf(Calcularkilometros));
-        
-       
-        
-       
-
-
-
-
-
-// TODO add your handling code here:
+        jTextArea1.append("\n" + pagarKilometros.getText());
     }//GEN-LAST:event_calcularKilometrosActionPerformed
 
     private void jButtonCalcularTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularTiempoActionPerformed
-        // TODO add your handling code here:
+        int Tiempo = Integer.valueOf(jTextFieldTiempo.getText());
+        int CalcularTiempo = Tiempo * 15;
+        NumberFormat formatoEuro = NumberFormat.getCurrencyInstance(new Locale("es","ES"));
+        
+        pagarTiempo.setText(formatoEuro.format(CalcularTiempo));
+        jTextArea1.append("\n" + pagarTiempo.getText());
+
     }//GEN-LAST:event_jButtonCalcularTiempoActionPerformed
 
     private void jTextFieldTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTiempoActionPerformed
- 
-        int Tiempo = Integer.valueOf(jTextFieldTiempo.getText());
-        int CalcularTiempo = Tiempo * 15;
-        pagarTiempo.setText(String.valueOf(CalcularTiempo));
         
     }//GEN-LAST:event_jTextFieldTiempoActionPerformed
 
     private void jTextFieldClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldClienteActionPerformed
            
-         Random  number = new Random();
-          System.out.println(number);
-          
-          
-         
     }//GEN-LAST:event_jTextFieldClienteActionPerformed
+
+    private void jTextFieldKilometrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldKilometrosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldKilometrosActionPerformed
+
+    private void jButtonTransformarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTransformarActionPerformed
+        float cambioDolar = 1.06f;
+        float cambioLibra = 1.41f;
+        float cambio = jRadioButtonDolar.isSelected() ? cambioDolar : cambioLibra;
+        jTextArea1.append("\n" + cambio);
+
+    }//GEN-LAST:event_jButtonTransformarActionPerformed
+
+    private void jRadioButtonDolarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDolarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonDolarActionPerformed
+
+    private void jRadioButtonLibraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonLibraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonLibraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,22 +283,11 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CalculadoraDeDivisas().setVisible(true);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraDeDivisas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraDeDivisas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraDeDivisas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraDeDivisas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        });
         //</editor-fold>
 
         /* Create and display the form */
@@ -257,16 +295,17 @@ public class CalculadoraDeDivisas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton calcularKilometros;
     private javax.swing.JButton jButtonCalcularTiempo;
     private javax.swing.JButton jButtonTransformar;
-    private javax.swing.JCheckBox jCheckBoxDolars;
-    private javax.swing.JCheckBox jCheckBoxPounds;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JRadioButton jRadioButtonDolar;
+    private javax.swing.JRadioButton jRadioButtonLibra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldCliente;
